@@ -1,37 +1,47 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="<c:url value="/resources/css/welcome.css" />" rel="stylesheet">
+<title>Document</title>
+<link rel="icon" href="<c:url value="resources/images/icon.ico" />" type="image/x-icon">
 
-    <title>Welcome</title>
-
-    <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
 
-<div class="container">
+	<div class="full">
+		<div class="centered">
+			<div class="container">
+				<jsp:include page="panelhome.jsp" />
+			</div>
+		</div>
 
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
+		<div class="split left">
 
-        <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a>
-        </h2>
+			<div id="London" class="tabcontent">
 
-    </c:if>
 
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+				<div id="Status" class="tabcontent2">
+					<jsp:include page="panelobject.jsp" />
+					<jsp:include page="all.jsp" />
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="split right">
+			<div class="container">
+				<jsp:include page="panelright.jsp"></jsp:include>
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>
