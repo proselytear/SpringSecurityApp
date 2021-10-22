@@ -9,12 +9,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
  * Implementation of {@link UserService} interface.
  *
- * @author Eugene Suleimanov
+ * @author Ekateryna Nosenko
  * @version 1.0
  */
 
@@ -43,4 +44,12 @@ public class UserServiceImpl implements UserService {
     public User findByUsername(String username) {
         return userDao.findByUsername(username);
     }
+
+	@Override
+	public List<User> findAll1() {
+		// TODO Auto-generated method stub
+		return userDao.findAll();
+	}
+
+
 }

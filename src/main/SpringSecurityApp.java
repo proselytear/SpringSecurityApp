@@ -1,0 +1,44 @@
+import java.util.Collections;
+import java.util.Date;
+import java.util.Map;
+import java.util.Properties;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.env.PropertiesPropertySource;
+import org.springframework.core.env.PropertySource;
+
+public class SpringSecurityApp {
+	private static final Logger LOG = LoggerFactory.getLogger(SpringSecurityApp.class);
+
+	public static void main(String[] args) {
+		System.out.println("HII");
+		try {
+			LOG.info("INIT PHASE START");
+			ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(
+					new String[] { "classpath:webapp/WEB-INF/appconfig-root.xml" }, false);
+			ctx.refresh();
+			ctx.registerShutdownHook();
+			if (ctx.isActive() && ctx.isRunning()) {
+				LOG.info("Spring context has successfully started {}", new Date(ctx.getStartupDate()));
+			} else {
+				LOG.error("Context is not active or running");
+			}
+			PropertySource<?> source = ((PropertySourcesPlaceholderConfigurer) ctx.getBean("serverProperties"))
+					.getAppliedPropertySources()
+					.get(PropertySourcesPlaceholderConfigurer.LOCAL_PROPERTIES_PROPERTY_SOURCE_NAME);
+			Properties props = new Properties();
+			if (source instanceof PropertiesPropertySource) {
+				Map<String, Object> entry = ((PropertiesPropertySource) source).getSource();
+				props.putAll(Collections.unmodifiableMap(entry));
+			}
+			System.out.println(props.toString());
+			LOG.info("INIT PHASE END");
+
+		} catch (Exception e) {
+			LOG.error("Context creation failure", e);
+		}
+	}
+}

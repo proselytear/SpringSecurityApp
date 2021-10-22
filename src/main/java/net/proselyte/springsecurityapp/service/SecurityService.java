@@ -3,13 +3,13 @@ package net.proselyte.springsecurityapp.service;
 /**
  * Service for Security.
  *
- * @author Eugene Suleimanov
+ * @author Ekateryna Nosenko
  * @version 1.0
  */
 
 public interface SecurityService {
 
-    String findLoggedInUsername();
+	String findLoggedInUsername();
 
-    void autoLogin(String username, String password);
+	void autoLogin(String username, String password);
 }

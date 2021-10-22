@@ -1,0 +1,11 @@
+header{
+    position:fixed;
+    height:100px;
+    width:100%;
+}
+
+section{
+    padding-top:50px;
+    height:500px;
+
+}
